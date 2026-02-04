@@ -1,0 +1,17 @@
+{
+  "version": "1.1",
+  "project": "hello-game",
+  "purpose": "P4 minimum closed-loop test",
+  "communication": {
+    "current_task.json": "Claude -> Cursor task definition",
+    "task_result.json": "Cursor -> Claude result report",
+    "ask_claude.json": "Cursor asks Claude",
+    "claude_response.json": "Claude answers Cursor"
+  },
+  "commit_tags": {
+    "[NODE_COMPLETE]": "Task node done",
+    "[ASK_CLAUDE]": "Need Claude help",
+    "[STAGE_DONE]": "Stage completed",
+    "[APK_READY]": "APK built"
+  }
+}
