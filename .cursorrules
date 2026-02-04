@@ -1,0 +1,29 @@
+# Hello Game - Cursor Instructions
+
+## Project Info
+- Unity 2022.3.47f1c1, Built-In Render Pipeline, Portrait 1080x1920
+- GitHub: skyofzhang/hello-game
+
+## Current Task: HG-001
+Create MainScene with Canvas, BackgroundImage, TitleText, ColorButton, GameManager.
+See SETUP_INSTRUCTIONS.md for exact specs.
+GameManager.cs is already written in Assets/Scripts/.
+
+## Rules
+1. Read .task/current_task.json for structured task details
+2. Follow SETUP_INSTRUCTIONS.md exactly (colors, sizes, positions)
+3. When task is done: screenshot to .task/screenshots/, commit with [NODE_COMPLETE]
+4. If blocked: write to .task/ask_claude.json, commit with [ASK_CLAUDE]
+5. Do NOT modify GameManager.cs unless absolutely necessary
+6. Do NOT make creative decisions - follow the spec exactly
+
+## Git Commit Tags
+- [NODE_COMPLETE] = task done, submit for review
+- [ASK_CLAUDE] = need help, check .task/ask_claude.json
+- [STAGE_DONE] = stage milestone complete
+- [APK_READY] = APK built and ready
+
+## Quality
+- Zero warnings in Unity console
+- Test: Play mode, click button 10 times, no crash
+- Screenshot must show the actual running game
