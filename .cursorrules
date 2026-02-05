@@ -1,29 +1,93 @@
-# Hello Game - AI Game Pipeline Project
-# Updated: 2026-02-05
+# AI Game Pipeline - Cursor Configuration
+# Updated: 2026-02-05 | Version: V1.1.1
 
 ## Unity Environment
 - Unity.exe: D:\program\2022.3.47f1c1\Editor\Unity.exe
 - Version: 2022.3.47f1c1
+- Modules: Android, WebGL, Windows
 - Project Path: E:\Ai\hello-game
-- Android Build Support: Installed
 - Orientation: Portrait 1080x1920
 - Platform: Android ARM64
 - Package: com.aigamestudio.hellogame
 
-## Current Task: IDLE (waiting for next assignment)
-- All HG-001/HG-002 tasks completed
-- Pipeline verified end-to-end
+## Current Task
+- Read .task/current_task.json for assignments
+- Always git pull before starting work
 
-## Auto Build Command (PowerShell):
-# & "D:\program\2022.3.47f1c1\Editor\Unity.exe" -batchmode -nographics -projectPath "E:\Ai\hello-game" -executeMethod BuildScript.BuildFromCommandLine -quit -logFile "E:\Ai\hello-game\build.log"
+## Terminal Rules (CRITICAL)
+- Terminal is PowerShell, NEVER use && to chain commands
+- Use semicolons ; to chain commands
+- Use Remove-Item instead of rmdir
+- Use Copy-Item instead of xcopy
+- Use Test-Path instead of if exist
 
-## Rules
-- Terminal is PowerShell, use ; not &&
-- Always read .task/current_task.json for assignments
-- Always commit with proper tags: [NODE_COMPLETE], [ASK_CLAUDE], [APK_READY]
-- After build, check build.log for errors
+## Auto Build SOP (MUST FOLLOW THIS ORDER)
+When building APK, follow these steps exactly:
 
-## Quality
+### Step 1: Close Unity GUI (MANDATORY before command-line build)
+```powershell
+$unityProcess = Get-Process -Name "Unity" -ErrorAction SilentlyContinue
+if ($unityProcess) {
+    Write-Host "Closing Unity GUI..."
+    $unityProcess | Stop-Process -Force
+    Start-Sleep -Seconds 5
+    Write-Host "Unity GUI closed"
+} else {
+    Write-Host "Unity GUI not running, safe to build"
+}
+```
+
+### Step 2: Run command-line build
+```powershell
+& "D:\program\2022.3.47f1c1\Editor\Unity.exe" -batchmode -nographics -projectPath "E:\Ai\hello-game" -executeMethod BuildScript.BuildFromCommandLine -quit -logFile "E:\Ai\hello-game\build.log"
+```
+
+### Step 3: Monitor build progress
+```powershell
+# Wait for build to complete (Unity process exits when done)
+while (Get-Process -Name "Unity" -ErrorAction SilentlyContinue) {
+    Write-Host "Building... waiting"
+    Start-Sleep -Seconds 10
+}
+```
+
+### Step 4: Check build result
+```powershell
+$apk = "E:\Ai\hello-game\Builds\Android\HelloGame.apk"
+if (Test-Path $apk) {
+    $size = (Get-Item $apk).Length / 1MB
+    Write-Host "BUILD SUCCESS: $apk ($([math]::Round($size,1)) MB)"
+} else {
+    Write-Host "BUILD FAILED - check build.log"
+    Get-Content "E:\Ai\hello-game\build.log" | Select-Object -Last 50
+}
+```
+
+### Step 5: If build fails, check build.log
+```powershell
+Get-Content "E:\Ai\hello-game\build.log" | Select-String -Pattern "error|Error|ERROR|failed|Failed" | Select-Object -Last 20
+```
+
+### Step 6: Reopen Unity GUI after build (optional, for continued development)
+```powershell
+Start-Process "D:\program\2022.3.47f1c1\Editor\Unity.exe" -ArgumentList "-projectPath `"E:\Ai\hello-game`""
+```
+
+## Build Troubleshooting
+- "Another Unity instance is running": Close Unity GUI first (Step 1)
+- "Android SDK not found": Check Unity Hub > Installs > Android module
+- "Script compilation error": Fix C# errors before building
+- APK size should be > 1MB for a valid build
+- Build time: typically 1-5 minutes for small projects
+
+## Git Commit Tags
+- [NODE_COMPLETE] - Task finished, ready for review
+- [ASK_CLAUDE] - Need help from Claude
+- [APK_READY] - APK built successfully
+- [BUG_FIX] - Bug fix commit
+
+## Quality Standards
 - 0 compile errors before build
-- APK must be valid (>1MB)
-- Always run git pull before starting work
+- Console: 0 errors, 0 warnings in Play mode
+- APK must be installable on Android device
+- Always test in Play mode before building APK
