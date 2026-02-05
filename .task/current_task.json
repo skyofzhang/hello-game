@@ -1,29 +1,25 @@
 {
-  "task_id": "HG-001",
-  "stage": "stage_4_development",
-  "type": "implement",
-  "title": "Create Hello Game Unity Scene",
-  "description": "Create a Unity scene (MainScene) with: 1) Canvas with Screen Space Overlay and Canvas Scaler set to Scale With Screen Size (1080x1920 portrait). 2) BackgroundImage: full-screen Image component, color #1a1a2e. 3) TitleText: TextMeshProUGUI showing 'Hello Game', font size 72, white, centered. 4) ColorButton: Button at bottom, blue (#4A90D9), with 'Change Color' text. 5) GameManager empty GameObject with GameManager.cs script attached, references wired to TitleText and ColorButton. The GameManager.cs script is already provided in Assets/Scripts/. Open the project in Unity 2022.3.47f1c1, create the scene, wire everything up, and take a screenshot of the running game.",
-  "input_files": [
-    "Assets/Scripts/GameManager.cs",
-    "SETUP_INSTRUCTIONS.md"
+  "task_id": "HG-002",
+  "title": "Build Android APK",
+  "priority": "P4",
+  "assigned_to": "cursor",
+  "status": "assigned",
+  "description": "Use Unity command line to build Android APK automatically",
+  "steps": [
+    "1. Pull latest code from GitHub (git pull origin main)",
+    "2. Ensure Android Build Support is installed in Unity",
+    "3. Run Unity command line build: Unity.exe -batchmode -nographics -projectPath . -executeMethod BuildScript.BuildFromCommandLine -quit -logFile build.log",
+    "4. If Android SDK/NDK not found, try building via Unity GUI: Tools > Hello Game > Build Android APK",
+    "5. Check Builds/Android/HelloGame.apk exists",
+    "6. Report build result in .task/task_result.json",
+    "7. Git commit with [NODE_COMPLETE] tag and push"
   ],
-  "output_expected": {
-    "files": [
-      "Assets/Scenes/MainScene.unity"
-    ],
-    "screenshot": true,
-    "video": false
-  },
   "acceptance_criteria": [
-    "AC1: Game launches within 3 seconds, no black screen",
-    "AC2: Dark blue background (#1a1a2e) fills entire screen, no black edges",
-    "AC3: 'Hello Game' text displayed centered on screen, white color (#FFFFFF), font size 72",
-    "AC4: 'Change Color' button visible at bottom center, blue (#4A90D9), clickable",
-    "AC5: Clicking button changes title text color immediately (under 50ms response)",
-    "AC6: 10 consecutive button clicks without crash",
-    "AC7: Screenshot of running game submitted to .task/screenshots/"
+    "HelloGame.apk file generated in Builds/Android/",
+    "APK file size > 1MB (valid APK)",
+    "Build log shows BUILD SUCCESS",
+    "No compilation errors"
   ],
-  "commit_tag": "[NODE_COMPLETE]",
-  "priority": "critical"
+  "unity_exe_path": "C:/Program Files/Unity/Hub/Editor/2022.3.47f1c1/Editor/Unity.exe",
+  "notes": "If Unity command line fails, use the menu Tools > Hello Game > Build Android APK in Unity GUI. The user has Unity open at E:\Ai\hello-game"
 }
