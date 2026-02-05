@@ -1,29 +1,31 @@
-# Hello Game - Cursor Instructions
+# Hello Game - AI Game Pipeline Project
+# Updated: 2026-02-05
+
+## Current Task: HG-002 Build Android APK
+- Build the Android APK using Unity command line or Editor menu
+- BuildScript.cs is already in Assets/Editor/BuildScript.cs
+
+## Steps:
+1. git pull origin main (get latest BuildScript.cs)
+2. Try command line build first:
+   & "C:\Program Files\Unity\Hub\Editor\2022.3.47f1c1\Editor\Unity.exe" -batchmode -nographics -projectPath "E:\Ai\hello-game" -executeMethod BuildScript.BuildFromCommandLine -quit -logFile "E:\Ai\hello-game\build.log"
+3. If command line fails (e.g. no Android SDK), open Unity and use menu: Tools > Hello Game > Build Android APK
+4. Verify Builds/Android/HelloGame.apk exists and size > 1MB
+5. Update .task/task_result.json with result
+6. git add -A && git commit -m "[NODE_COMPLETE] HG-002 APK built successfully" && git push origin main
 
 ## Project Info
-- Unity 2022.3.47f1c1, Built-In Render Pipeline, Portrait 1080x1920
-- GitHub: skyofzhang/hello-game
-
-## Current Task: HG-001
-Create MainScene with Canvas, BackgroundImage, TitleText, ColorButton, GameManager.
-See SETUP_INSTRUCTIONS.md for exact specs.
-GameManager.cs is already written in Assets/Scripts/.
+- Unity: 2022.3.47f1c1
+- Project Path: E:\Ai\hello-game
+- Orientation: Portrait 1080x1920
+- Platform: Android ARM64
+- Package: com.aigamestudio.hellogame
 
 ## Rules
-1. Read .task/current_task.json for structured task details
-2. Follow SETUP_INSTRUCTIONS.md exactly (colors, sizes, positions)
-3. When task is done: screenshot to .task/screenshots/, commit with [NODE_COMPLETE]
-4. If blocked: write to .task/ask_claude.json, commit with [ASK_CLAUDE]
-5. Do NOT modify GameManager.cs unless absolutely necessary
-6. Do NOT make creative decisions - follow the spec exactly
-
-## Git Commit Tags
-- [NODE_COMPLETE] = task done, submit for review
-- [ASK_CLAUDE] = need help, check .task/ask_claude.json
-- [STAGE_DONE] = stage milestone complete
-- [APK_READY] = APK built and ready
+- Terminal is PowerShell, use ; not &&
+- Use $json prefix in n8n expressions
+- Always commit with proper tags: [NODE_COMPLETE], [ASK_CLAUDE]
 
 ## Quality
-- Zero warnings in Unity console
-- Test: Play mode, click button 10 times, no crash
-- Screenshot must show the actual running game
+- 0 compile errors before build
+- APK must be valid and installable
