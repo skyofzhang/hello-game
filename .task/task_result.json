@@ -1,1 +1,12 @@
-{"task_id":"HG-001","status":"verified","timestamp":"2026-02-05T00:15:00+08:00"}
+{
+  "task_id": "HG-002",
+  "status": "blocked_cli",
+  "timestamp": "2026-02-04T00:00:00+08:00",
+  "summary": "Unity command line build skipped - Unity.exe not found at expected path",
+  "details": {
+    "unity_path_checked": "C:/Program Files/Unity/Hub/Editor/2022.3.47f1c1/Editor/Unity.exe",
+    "action_required": "Build via Unity GUI: Tools > Hello Game > Build Android APK",
+    "build_script_fixed": true,
+    "note": "BuildScript.cs syntax error (\\!Directory) was fixed. After GUI build, APK will be at Builds/Android/HelloGame.apk"
+  }
+}

@@ -9,7 +9,7 @@ public class BuildScript
     public static void BuildAndroid()
     {
         string buildPath = "Builds/Android";
-        if (\!Directory.Exists(buildPath))
+        if (!Directory.Exists(buildPath))
             Directory.CreateDirectory(buildPath);
 
         string apkPath = Path.Combine(buildPath, "HelloGame.apk");
